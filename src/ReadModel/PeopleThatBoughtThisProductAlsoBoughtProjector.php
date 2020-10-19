@@ -29,7 +29,7 @@ class PeopleThatBoughtThisProductAlsoBoughtProjector extends Projector
     protected function applyBasketCheckedOut(BasketCheckedOut $event)
     {
         foreach ($event->getProducts() as $productId => $count) {
-            $readModel = $this->getReadModel($productId);
+            $readModel = $this->getReadModel((string) $productId);
 
             $products = $event->getProducts();
             unset($products[$productId]);

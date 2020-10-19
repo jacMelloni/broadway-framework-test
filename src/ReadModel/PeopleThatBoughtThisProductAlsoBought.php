@@ -44,7 +44,7 @@ class PeopleThatBoughtThisProductAlsoBought implements SerializableReadModel
         ];
     }
 
-    public function addProduct(string $productId, int $count)
+    public function addProduct($productId, int $count)
     {
         if (!isset($this->otherProducts[$productId])) {
             $this->otherProducts[$productId] = 0;
