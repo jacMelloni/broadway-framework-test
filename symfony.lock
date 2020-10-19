@@ -2,6 +2,9 @@
     "beberlei/assert": {
         "version": "v2.8.1"
     },
+    "brick/math": {
+        "version": "0.9.1"
+    },
     "broadway/broadway": {
         "version": "2.0.0"
     },
@@ -176,6 +179,9 @@
     "qandidate/stack-request-id": {
         "version": "1.1.0"
     },
+    "ramsey/collection": {
+        "version": "1.1.1"
+    },
     "ramsey/uuid": {
         "version": "3.7.1"
     },
@@ -245,6 +251,9 @@
     "symfony/polyfill-intl-idn": {
         "version": "v1.14.0"
     },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.18.1"
+    },
     "symfony/polyfill-mbstring": {
         "version": "v1.6.0"
     },
@@ -256,6 +265,9 @@
     },
     "symfony/polyfill-php73": {
         "version": "v1.14.0"
+    },
+    "symfony/polyfill-php80": {
+        "version": "v1.18.1"
     },
     "symfony/symfony": {
         "version": "v4.1.0"
