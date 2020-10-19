@@ -35,12 +35,18 @@ class DropReadModelCommand extends ContainerAwareCommand
      */
     private $repository;
 
-    public function __construct(Connection $connection, DBALRepository $repository)
-    {
-        parent::__construct();
+    /**
+     * @var string
+     */
+    private $commandName;
 
+    public function __construct(Connection $connection, DBALRepository $repository, string $commandName)
+    {
         $this->repository = $repository;
         $this->connection = $connection;
+        $this->commandName = $commandName;
+
+        parent::__construct();
     }
 
     /**
@@ -51,7 +57,7 @@ class DropReadModelCommand extends ContainerAwareCommand
         parent::configure();
 
         $this
-            ->setName('broadway:read-model:drop')
+            ->setName($this->commandName)
             ->setDescription('Drops the read model table');
     }
 

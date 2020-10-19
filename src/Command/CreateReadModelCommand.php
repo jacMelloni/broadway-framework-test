@@ -34,12 +34,18 @@ class CreateReadModelCommand extends ContainerAwareCommand
      */
     private $connection;
 
-    public function __construct(Connection $connection, DBALRepository $repository)
-    {
-        parent::__construct();
+    /**
+     * @var string
+     */
+    private $commandName;
 
+    public function __construct(Connection $connection, DBALRepository $repository, string $commandName)
+    {
         $this->repository = $repository;
         $this->connection = $connection;
+        $this->commandName = $commandName;
+
+        parent::__construct();
     }
 
     /**
@@ -50,7 +56,7 @@ class CreateReadModelCommand extends ContainerAwareCommand
         parent::configure();
 
         $this
-            ->setName('broadway:read-model:create')
+            ->setName($this->commandName)
             ->setDescription('Creates the read model table');
     }
 

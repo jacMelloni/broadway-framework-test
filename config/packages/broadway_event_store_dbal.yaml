@@ -9,6 +9,6 @@ services:
             - "@doctrine.dbal.default_connection"
             - "@broadway.serializer.payload"
             - "@broadway.serializer.metadata"
-            - "events"
+            - "basket_events"
             - false
             - "@broadway.uuid.converter"

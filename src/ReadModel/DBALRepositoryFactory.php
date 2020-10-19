@@ -28,19 +28,13 @@ class DBALRepositoryFactory implements RepositoryFactory
      * @var Serializer
      */
     private $serializer;
-    /**
-     * @var
-     */
-    private $tableName;
 
     public function __construct(
         Connection $connection,
-        Serializer $serializer,
-        $tableName
+        Serializer $serializer
     ) {
         $this->connection = $connection;
         $this->serializer = $serializer;
-        $this->tableName = $tableName;
     }
 
     /**
@@ -48,6 +42,6 @@ class DBALRepositoryFactory implements RepositoryFactory
      */
     public function create(string $name, string $class): Repository
     {
-        return new DBALRepository($this->connection, $this->serializer, $this->tableName, $class);
+        return new DBALRepository($this->connection, $this->serializer, $name, $class);
     }
 }

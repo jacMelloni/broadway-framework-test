@@ -19,8 +19,17 @@ services:
         public: true
         factory: ['@broadway.read_model.repository_factory', create]
         arguments:
-            - "broadway_demo.people_that_bought_this_product"
+            - "related_products"
             - "BroadwayDemo\\ReadModel\\PeopleThatBoughtThisProductAlsoBought"
+
+
+    broadway_demo.read_model.repository.total_products_sold:
+        class: Broadway\ReadModel\ReadModel
+        public: true
+        factory: [ '@broadway.read_model.repository_factory', create ]
+        arguments:
+            - "total_products_sold"
+            - "BroadwayDemo\\ReadModel\\TotalProductsSold"
 
     broadway_demo.read_model.projector.people_that_bought_this_product:
         class: BroadwayDemo\ReadModel\PeopleThatBoughtThisProductAlsoBoughtProjector
@@ -29,9 +38,17 @@ services:
         tags:
             - { name: broadway.domain.event_listener }
 
+
+    broadway_demo.read_model.projector.total_products_sold:
+       class: BroadwayDemo\ReadModel\TotalProductsSoldProjector
+       arguments:
+           - '@broadway_demo.read_model.repository.total_products_sold'
+       tags:
+           - { name: broadway.domain.event_listener }
+
+
     my_read_model_repository_factory:
         class: BroadwayDemo\ReadModel\DBALRepositoryFactory
         arguments:
             - '@doctrine.dbal.default_connection'
             - '@broadway.serializer.readmodel'
-            - "read_model"
