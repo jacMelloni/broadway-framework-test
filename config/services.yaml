@@ -1,0 +1,51 @@
+services:
+    broadway_demo.controller.basket:
+        class: BroadwayDemo\Controller\BasketController
+        arguments:
+            - '@broadway.command_handling.command_bus'
+            - '@broadway.uuid.generator'
+        public: true
+
+    broadway_demo.controller.people_that_bought_this_product:
+        class: BroadwayDemo\Controller\PeopleThatBoughtThisProductAlsoBoughtController
+        arguments:
+            - '@broadway_demo.read_model.repository.people_that_bought_this_product'
+        public: true
+
+    broadway.stack.request_id.monolog_processor:
+        class: Qandidate\Stack\RequestId\MonologProcessor
+        tags:
+        - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 255 }
+        - { name: monolog.processor }
+
+    broadway_demo.command.create_read_model:
+        class: BroadwayDemo\Command\CreateReadModelCommand
+        arguments:
+        - "@doctrine.dbal.default_connection"
+        - "@broadway_demo.read_model.repository.people_that_bought_this_product"
+        tags:
+        - { name: console.command }
+
+    broadway_demo.command.drop_read_model:
+        class: BroadwayDemo\Command\DropReadModelCommand
+        arguments:
+        - "@doctrine.dbal.default_connection"
+        - "@broadway_demo.read_model.repository.people_that_bought_this_product"
+        tags:
+        - { name: console.command }
+
+    broadway_demo.command.create_event_store:
+        class: BroadwayDemo\Command\CreateEventStoreCommand
+        arguments:
+        - "@doctrine.dbal.default_connection"
+        - "@broadway.event_store"
+        tags:
+        - { name: console.command }
+
+    broadway_demo.command.drop_event_store:
+        class: BroadwayDemo\Command\DropEventStoreCommand
+        arguments:
+        - "@doctrine.dbal.default_connection"
+        - "@broadway.event_store"
+        tags:
+        - { name: console.command }
