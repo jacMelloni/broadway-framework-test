@@ -1,26 +1,18 @@
 # Demo for Broadway - EventSourcing library for PHP
 
 This repository contains a demo application to show how [Broadway] can be used within a Symfony application.
-The example is taken from the [Practical Event Sourcing][practical-eventsourcing] talk from [Mathias Verraes].
+The starting point is take from the [Broadway demo]
 
 [Broadway]: https://github.com/broadway/broadway
-[practical-eventsourcing]: http://verraes.net/2014/03/practical-event-sourcing.markdown/
-[Mathias Verraes]: https://twitter.com/mathiasverraes
+[Broadway demo]: https://github.com/broadway/broadway-demo
 
-For simplicity the demo uses the official [DBAL event store] and a custom DBAL read model implementation.
-You will need to have [SQLite] installed to run the demo.
-
-[DBAL event store]: https://github.com/broadway/event-store-dbal
-[SQLite]: https://www.sqlite.org/
-
-[![Build Status](https://travis-ci.org/broadway/broadway-demo.svg?branch=master)](https://travis-ci.org/broadway/broadway-demo)
-
-## Running the demo
+## Running the app
 
 ```
 composer install
 bin/console broadway:event-store:create
-bin/console broadway:read-model:create
+bin/console broadway:read-model-related:create
+bin/console broadway:read-model-total:create
 bin/console server:run
 ```
 
@@ -62,28 +54,3 @@ $ curl http://localhost:8000/advice/2011
   }
 }
 ```
-
-## Running the tests
-
-To run all the tests:
-
-```
-./vendor/bin/phpunit
-```
-
-## Code structure
-
-- Domain code can be found in `src/Basket`
-- ReadModel code can be found in `src/ReadModel`
-- Controllers can be found in `src/Controllers`
-
-Note that there are two files for the services: `services.yaml` and `domain.yaml`.
-`domain.yaml` contains all the domain-specific services (CommandHandler,
-ReadModels, Repositories), while `services.yaml` contains domain-unspecific
-services (controllers etc).
-
-The domain specific tests can be found in `test/Basket` and `test/ReadModel`
-
-Note that there is a functional test in `test/Functional`
-
-For more information, read our blog post about this demo: http://labs.qandidate.com/blog/2014/12/30/a-broadway-demo-application/
