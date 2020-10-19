@@ -1,7 +1,7 @@
 # Demo for Broadway - EventSourcing library for PHP
 
 This repository contains a demo application to show how [Broadway] can be used within a Symfony application.
-The starting point is take from the [Broadway demo]
+The starting point of this app is the [Broadway demo]
 
 [Broadway]: https://github.com/broadway/broadway
 [Broadway demo]: https://github.com/broadway/broadway-demo
